@@ -72,6 +72,7 @@ const SignIn = () => {
                 disabled={disabled}
                 value={rememberPassword}
                 onChange={() => setRememberPassword(!rememberPassword)}
+                required
               />
             </div>
           </label>

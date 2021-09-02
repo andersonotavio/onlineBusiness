@@ -28,15 +28,22 @@ const SignUp = () => {
  async function handleSubmit(event){
     event.preventDefault()
     setDisabled(true)
+    setError('')
 
-    const json = await api.login(email, password)
+    if(password !== confirmPassword){
+      setError('Senhas precisam ser iguais')
+      setDisabled(false)
+      return
+    }
 
-   /* if(json.error){
+    const json = await api.register(name, email, password, stateLoc )
+
+    if(json.error){
       setError(json.error)
     }else{
-      doLogin(json.token, rememberPassword)
+      doLogin(json.token)
       window.location.href = '/';
-    }*/
+    }
 
     setDisabled(false)
   }
