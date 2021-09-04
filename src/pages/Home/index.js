@@ -4,6 +4,7 @@ import { PageArea, SearchArea } from './styled';
 import useApi from '../../helpers/OnbAPI'
 
 import { PageContainer } from '../../components/MainComponents';
+import AdItem from '../../components/partials/AdItem';
 
 const Home = () => {
 
@@ -11,6 +12,7 @@ const Home = () => {
 
   const [listStates, setStatesList] = useState([])
   const [categories, setCategories] = useState([])
+  const [listAds, setListAds] = useState([])
 
   useEffect(()=>{
     const getStates =  async () => {
@@ -28,6 +30,16 @@ const Home = () => {
     getCategories()
   }, [])
 
+  useEffect(() => {
+    const getRecentsAds = async () =>{
+      const json = await api.getAds({
+        sort: 'desc',
+        limit: 8
+      })
+      setListAds(json.ads)
+    }
+    getRecentsAds()
+  }, [])
 
   return (
    <>
@@ -56,7 +68,14 @@ const Home = () => {
       </SearchArea>
       <PageContainer>
         <PageArea>
-          ...
+          <h2>Anúncios Recentes</h2>
+          <div className="list">
+            {listAds.map((i, k) =>
+              <AdItem key={k} data={i} />
+            )}
+          </div>
+          <Link to="/ads" className="seeAllLink">Ver todos</Link>
+          <hr/>
         </PageArea>
       </PageContainer>
    </>
