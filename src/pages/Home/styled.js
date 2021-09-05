@@ -78,13 +78,19 @@ export const PageArea = styled.div`
  .list{
    display: flex;
    flex-wrap: wrap;
+   .adItem{
+     width: 25%;
+   }
 
  }
- .seeAllList{
+ .seeAllLink{
    color: #000;
    text-decoration: none;
    font-weight: bold;
    display:inline-block;
    margin-top: 10px;
+   &:hover{
+     color: #AAA;
+   }
  }
 `
